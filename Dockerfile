@@ -22,9 +22,10 @@ RUN pip install azure-ai-vision
 # Verify the installation
 RUN python3.9 -V && python3.9 -m pip -V
 
- 
+# Keep the container running
+CMD ["tail", "-f", "/dev/null"]
+
 # docker build -t my-python-app .
 # docker run -it my-python-app /bin/bash
 
-# Keep the container running
-CMD ["tail", "-f", "/dev/null"]
+
