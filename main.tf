@@ -49,7 +49,7 @@ resource "null_resource" "update_env" {
 
 resource "null_resource" "docker_build" {
   provisioner "local-exec" {
-    command = "docker build -t my-hello-world-app ."
+    command = "docker build -t open-ai-poc ."
   }
 }
 
