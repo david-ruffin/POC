@@ -53,4 +53,15 @@ resource "null_resource" "docker_build" {
     command = "docker build -t open-ai-poc ."
   }
 }
+resource "null_resource" "run_docker" {
+  depends_on = [
+    null_resource.docker_build,
+    null_resource.update_env,
+    azurerm_cognitive_account.example
+  ]
+
+  provisioner "local-exec" {
+    command = "docker run -it -v $(pwd)/Labfiles:/usr/src/app my-python-app /bin/bash"
+  }
+}
 
