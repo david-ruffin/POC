@@ -1,4 +1,3 @@
-
 resource "azurerm_resource_group" "example" {
   name     = "rg-${var.resource_group_name}-${random_string.random.result}-${var.location}"
   location = var.location
@@ -12,16 +11,8 @@ resource "azurerm_cognitive_account" "example" {
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   kind                = "CognitiveServices"
-
-  sku_name = "S0"
-
-  tags = {
-    Acceptance = "Test"
-  }
-  #   provisioner "local-exec" {
-  #     when    = create
-  #     command = var.deployment_platform_is_windows ? "powershell.exe -File update-env.ps1 ${self.endpoint} ${self.primary_access_key}" : "sh update-env.sh ${self.endpoint} ${self.primary_access_key}"
-  #   }
+  sku_name            = "S0"
+  tags                = { Acceptance = "Test" }
   lifecycle {
     ignore_changes = [tags]
   }
@@ -43,7 +34,6 @@ resource "null_resource" "update_env" {
   depends_on = [azurerm_cognitive_account.example]
 
   provisioner "local-exec" {
-    # command = "sh update-env.sh '${azurerm_cognitive_account.example.endpoint}' '${azurerm_cognitive_account.example.primary_access_key}'"
     command = "echo AI_ENDPOINT=${azurerm_cognitive_account.example.endpoint} >> .env && echo AI_KEY=${azurerm_cognitive_account.example.primary_access_key} >> .env"
   }
 }
@@ -53,15 +43,19 @@ resource "null_resource" "docker_build" {
     command = "docker build -t open-ai-poc ."
   }
 }
-resource "null_resource" "run_docker" {
-  depends_on = [
-    null_resource.docker_build,
-    null_resource.update_env,
-    azurerm_cognitive_account.example
-  ]
+
+resource "null_resource" "docker_run" {
+  depends_on = [null_resource.docker_build, null_resource.update_env]
 
   provisioner "local-exec" {
-    command = "docker run -it -v $(pwd)/Labfiles:/usr/src/app my-python-app /bin/bash"
+    command = "docker run -d -v $(pwd)/Labfiles:/usr/src/app --name my-python-app open-ai-poc"
   }
 }
 
+resource "null_resource" "docker_exec" {
+  depends_on = [null_resource.docker_run]
+
+  provisioner "local-exec" {
+    command = "sh -c 'until docker exec my-python-app echo Container is up; do sleep 1; done'"
+  }
+}
