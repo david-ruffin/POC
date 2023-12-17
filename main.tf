@@ -43,7 +43,8 @@ resource "null_resource" "update_env" {
   depends_on = [azurerm_cognitive_account.example]
 
   provisioner "local-exec" {
-    command = "sh update-env.sh '${azurerm_cognitive_account.example.endpoint}' '${azurerm_cognitive_account.example.primary_access_key}'"
+    # command = "sh update-env.sh '${azurerm_cognitive_account.example.endpoint}' '${azurerm_cognitive_account.example.primary_access_key}'"
+    command = "echo AI_ENDPOINT=${azurerm_cognitive_account.example.endpoint} >> .env && echo AI_KEY=${azurerm_cognitive_account.example.primary_access_key} >> .env"
   }
 }
 
