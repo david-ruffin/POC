@@ -4,6 +4,9 @@ FROM python:3.9-slim
 # Set the working directory in the container
 WORKDIR /usr/src/app
 
+RUN chmod -R 777 /usr/src/app
+
+
 # Install Git
 RUN apt-get update && \
     apt-get install -y git && \
@@ -22,3 +25,6 @@ RUN python3.9 -V && python3.9 -m pip -V
  
 # docker build -t my-python-app .
 # docker run -it my-python-app /bin/bash
+
+# Keep the container running
+CMD ["tail", "-f", "/dev/null"]
