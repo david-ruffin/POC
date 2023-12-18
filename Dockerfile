@@ -27,3 +27,4 @@ CMD ["tail", "-f", "/dev/null"]
 
 # docker build -t open-ai-poc .
 # docker run -it open-ai-poc:latest /bin/bash
+# cd /data/Labfiles/01-analyze-images/Python/image-analysis/
