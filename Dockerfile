@@ -26,6 +26,6 @@ RUN python3.9 -V && python3.9 -m pip -V
 CMD ["tail", "-f", "/dev/null"]
 
 # docker build -t my-python-app .
-# docker run -it my-python-app /bin/bash
+# docker run -it my-python-app:latest /bin/bash
 
 
