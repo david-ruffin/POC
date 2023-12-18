@@ -28,3 +28,5 @@ CMD ["tail", "-f", "/dev/null"]
 # docker build -t open-ai-poc .
 # docker run -it open-ai-poc:latest /bin/bash
 # cd /data/Labfiles/01-analyze-images/Python/image-analysis/
+# echo "AI_SERVICE_ENDPOINT=" > .env && echo "AI_SERVICE_KEY=" >> .env
+# python image-analysis.py images/street.jpg
