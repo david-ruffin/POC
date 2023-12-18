@@ -25,5 +25,5 @@ RUN apt-get update && \
 # Keep the container running
 CMD ["tail", "-f", "/dev/null"]
 
-# docker build -t my-python-app .
-# docker run -it my-python-app:latest /bin/bash
+# docker build -t open-ai-poc .
+# docker run -it open-ai-poc:latest /bin/bash
