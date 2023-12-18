@@ -44,18 +44,10 @@ resource "null_resource" "docker_build" {
   }
 }
 
-resource "null_resource" "docker_run" {
-  depends_on = [null_resource.docker_build, null_resource.update_env]
-
-  provisioner "local-exec" {
-    command = "docker run -d -v $(pwd)/Labfiles:/usr/src/app --name my-python-app open-ai-poc"
-  }
+output "resource_group_name" {
+  value = azurerm_resource_group.example.name
 }
 
-resource "null_resource" "docker_exec" {
-  depends_on = [null_resource.docker_run]
-
-  provisioner "local-exec" {
-    command = "sh -c 'until docker exec my-python-app echo Container is up; do sleep 1; done'"
-  }
+output "random_string" {
+  value = random_string.random.result
 }
