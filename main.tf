@@ -39,7 +39,10 @@ resource "null_resource" "update_env" {
 }
 
 resource "null_resource" "docker_build" {
-  provisioner "local-exec" {
+triggers = {
+    always_run = "${timestamp()}"
+  }  
+provisioner "local-exec" {
     command = "sudo docker build -t open-ai-poc ."
   }
 }
