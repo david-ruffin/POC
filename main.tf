@@ -34,7 +34,7 @@ resource "null_resource" "update_env" {
   depends_on = [azurerm_cognitive_account.example]
 
   provisioner "local-exec" {
-    command = "echo AI_ENDPOINT=${azurerm_cognitive_account.example.endpoint} >> .env && echo AI_KEY=${azurerm_cognitive_account.example.primary_access_key} >> .env"
+    command = "echo AI_SERVICE_ENDPOINT=${azurerm_cognitive_account.example.endpoint} > .env && echo AI_SERVICE_KEY=${azurerm_cognitive_account.example.primary_access_key} >> .env"
   }
 }
 
