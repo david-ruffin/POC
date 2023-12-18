@@ -13,3 +13,6 @@
 - Terraform https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli
 - Docker - ensure docker can be ran with sudo
 - Git
+
+
+`python image-analysis.py images/street.jpg`
