@@ -43,7 +43,7 @@ triggers = {
     always_run = "${timestamp()}"
   }  
 provisioner "local-exec" {
-    command = "sudo docker build -t open-ai-poc ."
+    command = "docker build -t open-ai-poc ."
   }
 }
 
