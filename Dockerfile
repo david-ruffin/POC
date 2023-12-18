@@ -18,7 +18,7 @@ RUN pip install python-dotenv Pillow matplotlib numpy azure-ai-vision
 
 # Install system packages required for Python libraries
 RUN apt-get update && \
-    apt-get install -y git libgl1-mesa-glx vi && \
+    apt-get install -y git libgl1-mesa-glx vim && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
