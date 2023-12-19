@@ -7,16 +7,33 @@ resource "azurerm_resource_group" "example" {
 }
 
 resource "azurerm_cognitive_account" "example" {
-  name                = "ai-${var.resource_group_name}-${random_string.random.result}"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
-  kind                = "CognitiveServices"
-  sku_name            = "S0"
-  tags                = { Acceptance = "Test" }
+  name                                         = "ai-${var.resource_group_name}-${random_string.random.result}"
+  location                                     = azurerm_resource_group.example.location
+  resource_group_name                          = azurerm_resource_group.example.name
+  custom_subdomain_name                        = "ai-${var.resource_group_name}-${random_string.random.result}"
+  kind                                         = "CognitiveServices"
+  dynamic_throttling_enabled                   = false
+  local_auth_enabled                           = true
+  sku_name                                     = "S0"
+  outbound_network_access_restricted           = false
+  public_network_access_enabled                = true
+  custom_question_answering_search_service_id  = null
+  custom_question_answering_search_service_key = null # sensitive
+  metrics_advisor_aad_client_id                = null
+  metrics_advisor_aad_tenant_id                = null
+  metrics_advisor_super_user_name              = null
+  metrics_advisor_website_name                 = null
+  qna_runtime_endpoint                         = null
+  tags                                         = { Acceptance = "Test" }
+  network_acls {
+    default_action = "Allow"
+    ip_rules       = []
+  }
   lifecycle {
     ignore_changes = [tags]
   }
 }
+
 
 output "ai_service_endpoint" {
   value = azurerm_cognitive_account.example.endpoint
