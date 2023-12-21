@@ -1,6 +1,6 @@
 # POC
 
-1. git clone
+1. run `git clone`
 2. cd in POC
 3. add variables to env.tfvars
 4. run `terraform init`
