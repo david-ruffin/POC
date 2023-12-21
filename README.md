@@ -21,10 +21,18 @@
    ```
    terraform apply -var-file="env.tfvars" -auto-approve
    ```
-9. Log into container using `docker run -it -v "$(pwd)/images:/data/Labfiles/01-analyze-images/Python/image-analysis/images2"`
-10. run `cd Labfiles/01-analyze-images/Python/image-analysis/ && cat .env && python image-analysis.py images/street.jpg` to confirm creds and run analysis on image
-11. To copy additional images to the images folder, `docker cp /path/to/local/images mycontainer:/data/Labfiles/01-analyze-images/Python/image-analysis/images`
-12. run `terraform destroy -var-file="env.tfvars"` to destroy environment
+7. Log into container and mount the local images folder. Dynamically add images to this folder if you want them analyized
+   ```
+   docker run -it -v "$(pwd)/images:/data/Labfiles/01-analyze-images/Python/image-analysis/images2"
+   ```
+10. Run the following command to list creds and run analysis on default image
+    ```
+    cd Labfiles/01-analyze-images/Python/image-analysis/ && cat .env && python image-analysis.py images/street.jpg
+    ```
+# Destroy Environment
+```
+terraform destroy -var-file="env.tfvars"
+```
 
 # pre-req
 - Terraform https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli
