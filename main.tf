@@ -44,6 +44,10 @@ output "ai_service_key" {
   sensitive = true
 }
 
+locals {
+  ai_service_endpoint = azurerm_cognitive_account.example.endpoint
+}
+
 resource "null_resource" "update_env" {
   triggers = {
     always_run = "${timestamp()}"
@@ -51,7 +55,7 @@ resource "null_resource" "update_env" {
   depends_on = [azurerm_cognitive_account.example]
 
   provisioner "local-exec" {
-    command = "echo AI_SERVICE_ENDPOINT=${azurerm_cognitive_account.example.endpoint} > ./Labfiles/01-analyze-images/Python/.env && echo AI_SERVICE_KEY=${azurerm_cognitive_account.example.primary_access_key} >> ./Labfiles/01-analyze-images/Python/.env"
+    command = "echo AI_SERVICE_ENDPOINT=${local.ai_service_endpoint} > ./Labfiles/01-analyze-images/Python/image-analysis/.env && echo AI_SERVICE_KEY=${azurerm_cognitive_account.example.primary_access_key} >> ./Labfiles/01-analyze-images/Python/image-analysis/.env"
   }
 }
 
