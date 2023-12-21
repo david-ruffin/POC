@@ -14,5 +14,6 @@
 - Docker - ensure docker can be ran with sudo
 - Git
 
-
+`cd Labfiles/01-analyze-images/Python/image-analysis/ && cat .env`
 `python image-analysis.py images/street.jpg`
+
