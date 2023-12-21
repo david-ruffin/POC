@@ -4,11 +4,23 @@
    ```
    git clone https://github.com/david-ruffin/POC.git
    ```
-4. run `cd POC`
-5. add Azure credententials to env.tfvars file
-6. run `terraform init`
-7. run `terraform plan -var-file="env.tfvars"` to see what will be deployed
-8. run `terraform apply -var-file="env.tfvars"` and type "yes" when prompted
+2. Change directory
+   ```
+   cd POC
+   ```
+3. Add Azure credententials to env.tfvars file
+4. Initialize Terraform environment
+   ```
+   terraform init
+   ```
+5. Display resources that will be created
+   ```
+   terraform plan -var-file="env.tfvars"
+   ``` 
+6. Deploy environment
+   ```
+   terraform apply -var-file="env.tfvars" -auto-approve
+   ```
 9. Log into container using `docker run -it -v "$(pwd)/images:/data/Labfiles/01-analyze-images/Python/image-analysis/images2"`
 10. run `cd Labfiles/01-analyze-images/Python/image-analysis/ && cat .env && python image-analysis.py images/street.jpg` to confirm creds and run analysis on image
 11. To copy additional images to the images folder, `docker cp /path/to/local/images mycontainer:/data/Labfiles/01-analyze-images/Python/image-analysis/images`
