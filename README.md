@@ -1,6 +1,6 @@
 # POC
 
-1. run `git clone https://github.com/david-ruffin/POC.git` to clone repo
+1. run ```git clone https://github.com/david-ruffin/POC.git``` to clone repo
 2. run `cd POC`
 3. add Azure credententials to env.tfvars file
 4. run `terraform init`
