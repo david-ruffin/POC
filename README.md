@@ -7,7 +7,7 @@
 5. run `terraform plan -var-file="env.tfvars"` to see what will be deployed
 6. run `terraform apply -var-file="env.tfvars"` and type "yes" when prompted
 7. Log into container using `docker run -it open-ai-poc /bin/bash`
-8. run `terraform destroy -var-file="env.tfvars" to destroy environment
+8. run `terraform destroy -var-file="env.tfvars"` to destroy environment
 
 
 # pre-req
