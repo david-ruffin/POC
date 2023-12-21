@@ -8,7 +8,8 @@
 6. run `terraform apply -var-file="env.tfvars"` and type "yes" when prompted
 7. Log into container using `docker run -it open-ai-poc /bin/bash`
 8. run `cd Labfiles/01-analyze-images/Python/image-analysis/ && cat .env && python image-analysis.py images/street.jpg` to confirm creds and run analysis on image
-9. run `terraform destroy -var-file="env.tfvars"` to destroy environment
+9. To copy additional images to the images folder, `docker cp /path/to/local/images mycontainer:/data/Labfiles/01-analyze-images/Python/image-analysis/images`
+10. run `terraform destroy -var-file="env.tfvars"` to destroy environment
 
 # pre-req
 - Terraform https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli
